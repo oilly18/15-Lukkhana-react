@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Table from "./Table";
 
 const AdminPage = () => {
   const [employees, setEmployees] = useState([]);
-  const [name, setName] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [position, setPosition] = useState('');
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [position, setPosition] = useState("");
 
-  const addEmployee = () => {
+  const addEmployee = (e) => {
+    e.preventDefault();
     const newEmployee = { name, lastname, position };
     setEmployees([...employees, newEmployee]);
-    setName('');
-    setLastname('');
-    setPosition('');
+    setName("");
+    setLastname("");
+    setPosition("");
   };
 
   const deleteEmployee = (index) => {
@@ -19,7 +21,6 @@ const AdminPage = () => {
     updatedEmployees.splice(index, 1);
     setEmployees(updatedEmployees);
   };
-
 
   return (
     <div>
@@ -45,7 +46,8 @@ const AdminPage = () => {
         />
         <button onClick={addEmployee}>Add</button>
       </div>
-      <table>
+      <Table data={employees} onDelete={deleteEmployee} />
+      {/* <table>
         <thead>
           <tr>
             <th>Name</th>
@@ -66,9 +68,8 @@ const AdminPage = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };
 export default AdminPage;
-
